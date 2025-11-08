@@ -1,0 +1,19 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: todo-service
+          uri: lb://todo-service
+          # lb = load balanced through Eureka
+
+          predicates:
+            - Path=/todo/**
+            # requests starting with /todo
+          filters:
+            - StripPrefix=1
+        - id: notification-service
+          uri: lb://notification-service
+          predicates:
+            - Path=/notification/**
+          filters:
+            - StripPrefix=1
