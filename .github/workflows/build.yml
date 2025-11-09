@@ -36,19 +36,19 @@ jobs:
 
       - name: Build Eureka Server
         working-directory: eureka-server
-        run: mvn -f eureka-server/pom.xml clean install
+        run: mvn clean install
 
       - name: Build API Gateway
         working-directory: api-gateway
-        run: mvn -f api-gateway/pom.xml clean install
+        run: mvn clean install
 
       - name: Build Todo Service
         working-directory: todo-service
-        run: mvn -f todo-service/pom.xml clean install
+        run: mvn clean install
 
       - name: Build Notification Service
         working-directory: notification-service
-        run: mvn -f notification-service/pom.xml clean install
+        run: mvn clean install
 
 
       - name: Login to Docker Hub
