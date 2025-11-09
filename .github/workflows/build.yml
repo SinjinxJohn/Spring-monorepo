@@ -1,0 +1,51 @@
+name: Build and Test Microservices
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8
+        env:
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: todoapp
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h localhost"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Build Eureka Server
+        working-directory: ./eureka-server
+        run: mvn clean install -DskipTests
+
+      - name: Build API Gateway
+        working-directory: ./api-gateway
+        run: mvn clean install -DskipTests
+
+      - name: Build Todo Service
+        working-directory: ./todo-service
+        run: mvn clean install -DskipTests
+
+      - name: Build Notification Service
+        working-directory: ./notification-service
+        run: mvn clean install -DskipTests
