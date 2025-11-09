@@ -15,6 +15,6 @@ public class healthCheck {
     private String port;
     @GetMapping("/health-check")
     public String healthCheck(){
-        return "Hello from instance running on port " + port + " at " + System.currentTimeMillis();
+        return "hello from instance running on port " + port + " at " + System.currentTimeMillis();
     }
 }
