@@ -77,6 +77,12 @@ jobs:
         run: |
           docker build -t sinjinxjohn/notification-service:latest ./notification-service
           docker push sinjinxjohn/notification-service:latest
+      - name: Install Docker Compose
+        run: |
+          sudo curl -L "https://github.com/docker/compose/releases/download/v2.20.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+          sudo chmod +x /usr/local/bin/docker-compose
+          docker-compose --version
+
       - name: Deploy to Docker
         run: |
           docker pull sinjinxjohn/eureka-server:latest
