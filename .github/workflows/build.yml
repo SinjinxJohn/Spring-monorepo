@@ -35,17 +35,17 @@ jobs:
           distribution: 'temurin'
 
       - name: Build Eureka Server
-        working-directory: ./eureka-server
+        working-directory: eureka-server
         run: mvn clean install -DskipTests
 
       - name: Build API Gateway
-        working-directory: ./api-gateway
+        working-directory: api-gateway
         run: mvn clean install -DskipTests
 
       - name: Build Todo Service
-        working-directory: ./todo-service
+        working-directory: todo-service
         run: mvn clean install -DskipTests
 
       - name: Build Notification Service
-        working-directory: ./notification-service
+        working-directory: notification-service
         run: mvn clean install -DskipTests
